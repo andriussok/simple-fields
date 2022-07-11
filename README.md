@@ -1,12 +1,12 @@
 # simple-fields
 
-Manage your info in a single place, access it with shortcode attributes.
+Manage your custom data in a single place, access it with shortcode attributes.
 
-```
+```php
 /**
  * Simple fields.
  *
- * Create single source data accessible via shortcode attributes,
+ * Create single source data accessible via wordpress shortcode attributes,
  * which can be used like global variables to dispay data in frontend.
  *
  * @param array  $atts      The user defined shortcode attributes.
@@ -27,11 +27,11 @@ function prefix_contact_cb( $atts, $content, $tag ) {
            'linkedin'   => 'https://linkedin.com/',
            ), $atts, 'prefix_contact' );
   
-  // Define key
+  // DEFINE user attributes.
   $att = $atts ? $atts[0] : null; // first attribute passed in shortcode.
   $not_in_array = !in_array( $att, array_keys($pairs) ); // is attribute a valid array key.
 
-  // Test passed attributre.
+  // TEST user attributes.
   if( empty( $atts ) || $not_in_array ) {
    
    // OPTIONAL message only for admins.
@@ -44,17 +44,18 @@ function prefix_contact_cb( $atts, $content, $tag ) {
       trigger_error( $msg );
    }
 
-   return; // End test, terminate.
+   return; // End test, terminate if truthy.
   }
 
-  // Get $pairs single key value.
+  // GET attribute value.
   $str = $pairs[ $att ];
   
-  // Maybe_sanitise.
+  // OPTIONAL maybe sanitise.
   $arr_html = array( 'br' => array(), 'span' => array() );
   $str = wp_kses( $str, $arr_html );
 
   ob_start(); // Start buffer.
   echo $str;
   return ob_get_clean(); // Clean buffer, return value.
-}```
+}
+```
