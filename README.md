@@ -39,7 +39,7 @@ function prefix_contact_cb( $atts, $content, $tag ) {
       $msg = 'Your shortcode <strong>'.$tag.'</strong> must have a valid attribute. ';
       $msg .= 'Current attribute ';
       if( empty( $atts ) ) $msg .= 'is <strong>empty.</strong> ';
-      if(!empty( $atts ) && $not_in_array ) $msg .= '<strong>'.$att.'</strong> is invalid. ';
+      if(!empty( $atts ) && $not_in_array ) $msg .= '<strong>'.$att.'</strong> is not defined. ';
       $msg .= '<br>Please check valid attributes in pairs array ';
       trigger_error( $msg );
    }
