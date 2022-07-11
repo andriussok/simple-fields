@@ -1,6 +1,6 @@
 # simple-fields
 
-Manage your info state data in a single place and access it with shortcode attributes.
+Manage your info in a single place, access it with shortcode attributes.
 
 ```
 /**
@@ -19,8 +19,8 @@ add_shortcode( 'prefix_contact', 'prefix_contact_cb' );
 function prefix_contact_cb( $atts, $content, $tag ) {
   $pairs = shortcode_atts(
            array(
-           'open_hours' => '8:00am - 5:00pm',
            'address'    => '20 Dummy Road, Bham, UK',
+           'open_hours' => '8:00am - 5:00pm',
            'phone'      => '+44 0123 456 789',
            'email'      => 'example@example.com',
            'facebook'   => 'https://fb.com/',
@@ -36,10 +36,10 @@ function prefix_contact_cb( $atts, $content, $tag ) {
    
    // OPTIONAL message only for admins.
    if( current_user_can( 'manage_options' ) ) {
-      $msg = "Your shortcode <strong> $tag </strong> must have a valid attribute. ";
+      $msg = 'Your shortcode <strong>'.$tag.'</strong> must have a valid attribute. ';
       $msg .= 'Current attribute ';
       if( empty( $atts ) ) $msg .= 'is <strong>empty.</strong> ';
-      if(!empty( $atts ) && $not_in_array ) $msg .= '<strong>' . $att . '</strong> is invalid. ';
+      if(!empty( $atts ) && $not_in_array ) $msg .= '<strong>'.$att.'</strong> is invalid. ';
       $msg .= '<br>Please check valid attributes in pairs array ';
       trigger_error( $msg );
    }
@@ -57,5 +57,4 @@ function prefix_contact_cb( $atts, $content, $tag ) {
   ob_start(); // Start buffer.
   echo $str;
   return ob_get_clean(); // Clean buffer, return value.
-}
-```
+}```
